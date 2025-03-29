@@ -10,8 +10,14 @@
 
     <div class="container">
         <h2>Password Strength Analyzer</h2>
-        <input type="password" id="password" placeholder="Enter your password">
-        <button id="togglePassword">👁️</button>
+        
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Enter your password">
+            <button id="togglePassword">👁️</button>
+        </div>
+
+        <button id="generatePassword">Generate Strong Password</button>
+        
         <div id="strength-meter"></div>
         <p id="strength-text"></p>
         <p id="recommendations"></p>
