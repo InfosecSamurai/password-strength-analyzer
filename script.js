@@ -4,9 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const strengthText = document.getElementById("strength-text");
     const recommendations = document.getElementById("recommendations");
     const togglePassword = document.getElementById("togglePassword");
+    const generatePasswordBtn = document.getElementById("generatePassword");
 
     passwordInput.addEventListener("input", updateStrengthMeter);
     togglePassword.addEventListener("click", togglePasswordVisibility);
+    generatePasswordBtn.addEventListener("click", generateStrongPassword);
+
+    const weakPasswords = ["123456", "password", "qwerty", "111111", "letmein", "admin", "welcome"];
 
     function updateStrengthMeter() {
         const password = passwordInput.value;
@@ -15,13 +19,20 @@ document.addEventListener("DOMContentLoaded", function () {
         strengthMeter.className = "";
         recommendations.innerHTML = "";
 
+        if (weakPasswords.includes(password)) {
+            strengthMeter.classList.add("weak");
+            strengthText.innerText = "Very Weak ❌";
+            recommendations.innerHTML = "⚠️ This password is commonly used. Avoid predictable passwords!";
+            return;
+        }
+
         if (strength.score === 1) {
             strengthMeter.classList.add("weak");
-            strengthText.innerText = "Weak";
+            strengthText.innerText = "Weak ❌";
             recommendations.innerHTML = "❌ Use at least 8 characters.<br>❌ Include uppercase, lowercase, numbers, and symbols.";
         } else if (strength.score === 2) {
             strengthMeter.classList.add("medium");
-            strengthText.innerText = "Medium";
+            strengthText.innerText = "Medium ⚠️";
             recommendations.innerHTML = "⚠️ Consider making your password longer.<br>⚠️ Use a mix of characters.";
         } else if (strength.score === 3) {
             strengthMeter.classList.add("strong");
@@ -47,5 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             passwordInput.type = "password";
         }
+    }
+
+    function generateStrongPassword() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        let password = "";
+        for (let i = 0; i < 12; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        passwordInput.value = password;
+        updateStrengthMeter();
     }
 });
