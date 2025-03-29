@@ -7,23 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
-        <h2>Password Strength Analyzer</h2>
-        
-        <div class="password-container">
-            <input type="password" id="password" placeholder="Enter your password">
-            <button id="togglePassword">👁️</button>
+        <h1>Password Strength Analyzer</h1>
+        <input type="password" id="password" placeholder="Enter your password" />
+        <div class="strength-meter">
+            <div id="strength-meter"></div>
+        </div>
+        <p id="strength-text">Strength: </p>
+        <p id="recommendations"></p>
+        <button id="togglePassword">👁️</button>
+
+        <!-- Password Generation Settings -->
+        <div class="password-settings">
+            <label for="length">Password Length:</label>
+            <input type="number" id="length" value="12" min="6" max="32">
+            <label><input type="checkbox" id="useNumbers" checked> Include Numbers</label>
+            <label><input type="checkbox" id="useSymbols" checked> Include Symbols</label>
+            <label><input type="checkbox" id="useUppercase" checked> Include Uppercase</label>
+            <button id="generateCustomPassword">Generate Custom Password</button>
         </div>
 
         <button id="generatePassword">Generate Strong Password</button>
-        
-        <div id="strength-meter"></div>
-        <p id="strength-text"></p>
-        <p id="recommendations"></p>
+        <button id="darkModeToggle" class="dark-mode-toggle">🌙 Dark Mode</button>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
